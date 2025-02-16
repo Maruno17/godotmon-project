@@ -1,13 +1,17 @@
 extends CharacterBody2D
+class_name Player
+
+
+##The player scene and all of the logic behind it.
+
 
 enum PlayerState { IDLE, TURNING, WALKING, RUNNING }
 enum FacingDirection { LEFT, RIGHT, UP, DOWN }
 
-# Size of a tile in pixels. Assumes tiles are square.
-const TILE_SIZE = 16
-# Default speed of this entity in tiles/second.
+
+## Default speed of this entity in tiles/second.
 const WALK_SPEED = 4.0
-# Running speed of this entity, as a multiplier of WALK_SPEED.
+## Running speed of this entity, as a multiplier of WALK_SPEED.
 const RUN_SPEED_MULTIPLIER = 2.0
 
 var player_state = PlayerState.IDLE
@@ -49,12 +53,12 @@ func _physics_process(delta: float) -> void:
 
 func process_player_input(moved_last_update: bool = false) -> void:
 	# Detect directional input
-	var input_direction = Vector2.ZERO
-	input_direction.x = Input.get_axis("ui_left", "ui_right")
-	if input_direction.x == 0:
-		input_direction.y = Input.get_axis("ui_up", "ui_down")
+	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	if input_direction.x != 0 and input_direction.y !=0:
+		input_direction.y = 0
+	
 	# If no directional input, idle
-	if input_direction == Vector2.ZERO:
+	if input_direction.is_zero_approx():
 		set_state(PlayerState.IDLE)
 		return
 	input_direction = input_direction.normalized()
@@ -95,7 +99,7 @@ func can_move_in_direction(direction: Vector2) -> bool:
 	if OS.is_debug_build() && Input.is_action_pressed("ui_control"):
 		return true
 	# Collision checks
-	ray.target_position = direction * TILE_SIZE
+	ray.target_position = direction * GlobalConst.TILE_SIZE
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		percent_moved_to_next_tile = 0.0
@@ -118,13 +122,13 @@ func update_move(delta: float) -> void:
 	percent_moved_to_next_tile += WALK_SPEED * move_speed_multiplier * delta
 	if percent_moved_to_next_tile >= 1.0:
 		# Finished moving
-		position = move_start_position + (move_direction * TILE_SIZE)
+		position = move_start_position + (move_direction * GlobalConst.TILE_SIZE)
 		percent_moved_to_next_tile = 0.0
 		move_direction = Vector2.ZERO
 		set_speed_modifier(true)
 		is_moving = false
 	else:
-		position = move_start_position + (move_direction * TILE_SIZE * percent_moved_to_next_tile)
+		position = move_start_position + (move_direction * GlobalConst.TILE_SIZE * percent_moved_to_next_tile)
 
 
 func should_run() -> bool:

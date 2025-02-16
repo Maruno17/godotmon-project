@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Godotmon Project"
-run/main_scene="res://assets/maps/test map.tscn"
+run/main_scene="res://src/main/main.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MusicPlayer="*res://src/autoloads/music_player/music_player.tscn"
+ScenesManager="*res://src/autoloads/scenes_manager.gd"
 
 [display]
 
