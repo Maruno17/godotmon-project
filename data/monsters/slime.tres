@@ -1,0 +1,82 @@
+[gd_resource type="Resource" script_class="MonsterData" load_steps=18 format=3 uid="uid://dotnsfnnkcdbi"]
+
+[ext_resource type="Script" path="res://src/data/monster/MonsterData.gd" id="1_lrtyt"]
+[ext_resource type="Script" path="res://src/data/monster/Stats.gd" id="1_pbfwa"]
+[ext_resource type="Script" path="res://src/data/monster/Breeding.gd" id="2_gjqm1"]
+[ext_resource type="Script" path="res://src/data/monster/evolution_conditions/EvolutionCondition.gd" id="3_isapw"]
+[ext_resource type="Script" path="res://src/data/monster/learnable_attack/LearnableAttack.gd" id="3_nmr5q"]
+[ext_resource type="Script" path="res://src/data/monster/evolution_conditions/EvolutionMinLevelCondition.gd" id="4_djgmi"]
+[ext_resource type="Script" path="res://src/data/monster/SkillDistribution.gd" id="4_slr74"]
+[ext_resource type="Script" path="res://src/data/monster/StatRewards.gd" id="5_rps8l"]
+[ext_resource type="Script" path="res://src/data/monster/Evolution.gd" id="5_tocbd"]
+[ext_resource type="Script" path="res://src/data/monster/MonsterResources.gd" id="7_aab18"]
+
+[sub_resource type="Resource" id="Resource_y84j4"]
+script = ExtResource("1_pbfwa")
+hp = 20
+physical_attack = 0
+physical_defence = 30
+special_attack = 25
+special_defence = 10
+speed = 10
+loyalty = 0
+accuracy = 0
+evasiveness = 0
+
+[sub_resource type="Resource" id="Resource_wj2cc"]
+script = ExtResource("2_gjqm1")
+groups = Array[int]([1])
+hatchSteps = 512
+femaleRate = 0
+baby = &"slime"
+
+[sub_resource type="Resource" id="Resource_ydbf2"]
+script = ExtResource("4_djgmi")
+min_level = 15
+relation_with_previous = 0
+
+[sub_resource type="Resource" id="Resource_cj16c"]
+script = ExtResource("5_tocbd")
+evolve_to = &"big_slime"
+conditions = Array[ExtResource("3_isapw")]([SubResource("Resource_ydbf2")])
+
+[sub_resource type="Resource" id="Resource_a8y7w"]
+script = ExtResource("7_aab18")
+front = ""
+back = ""
+icon = ""
+cry = ""
+conditional_resources = {}
+
+[sub_resource type="Resource" id="Resource_kro7q"]
+script = ExtResource("4_slr74")
+common = &"sticky"
+rare = &"sticky"
+hidden = &"disolve"
+
+[sub_resource type="Resource" id="Resource_0mhoy"]
+script = ExtResource("5_rps8l")
+hp = 0
+physical_attack = 1
+physical_defence = 0
+special_attack = 0
+special_defence = 0
+speed = 0
+loyalty = 0
+
+[resource]
+script = ExtResource("1_lrtyt")
+id = &"slime"
+specie = &"goo"
+elements = Array[StringName]([&"normal"])
+base_stats = SubResource("Resource_y84j4")
+stat_rewards = SubResource("Resource_0mhoy")
+experience_reward = 15
+evolutions = Array[Resource]([SubResource("Resource_cj16c")])
+grow_rate = 1
+breeding = SubResource("Resource_wj2cc")
+skills = SubResource("Resource_kro7q")
+learnable_attacks = Array[ExtResource("3_nmr5q")]([null])
+resource = SubResource("Resource_a8y7w")
+weight = 0.0
+height = 0.0

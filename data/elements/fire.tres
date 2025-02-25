@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Element" load_steps=2 format=3 uid="uid://dttgxrljxb472"]
+
+[ext_resource type="Script" path="res://src/data/Element.gd" id="1_gp3ic"]
+
+[resource]
+script = ExtResource("1_gp3ic")
+id = &"fire"
+strong_against = Array[StringName]([&"grass", &"steel"])
+weak_against = Array[StringName]([])
