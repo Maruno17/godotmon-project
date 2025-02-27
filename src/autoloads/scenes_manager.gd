@@ -7,7 +7,7 @@ extends Node
 enum SceneType {WORLD, ENTITY, UI}
 
 
-@onready var main : Main = get_tree().root.get_child(-1)
+@onready var main : Main = Main.instance
 
 
 ## Adds a scene to the main one.
