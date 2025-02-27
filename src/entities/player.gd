@@ -54,6 +54,9 @@ func _physics_process(delta: float) -> void:
 func process_player_input(moved_last_update: bool = false) -> void:
 	# Detect directional input
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	
+	# If you have a controller plugged in and dont round the following if statment makes it so you can only move left and right and never up and down -V
+	input_direction = input_direction.round()
 	if input_direction.x != 0 and input_direction.y !=0:
 		input_direction.y = 0
 	
