@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctg0aclj7s5o"]
+[gd_scene load_steps=8 format=3 uid="uid://ctg0aclj7s5o"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_sqiha"]
+[ext_resource type="Script" path="res://src/UI/dialogue_box.gd" id="2_k680c"]
 [ext_resource type="Script" path="res://src/main/debug.gd" id="2_s5un5"]
+[ext_resource type="Texture2D" uid="uid://rffaq44ec7ki" path="res://assets/graphics/ui/dialogue/windowskin/default_name_box.png" id="3_v4r3r"]
+[ext_resource type="Texture2D" uid="uid://cysqbvwau42c0" path="res://assets/graphics/ui/dialogue/windowskin/default_arrow.png" id="4_dwpl0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxxsr"]
+texture = ExtResource("3_v4r3r")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_em1ed"]
+texture = ExtResource("3_v4r3r")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1_sqiha")
@@ -9,13 +26,99 @@ script = ExtResource("1_sqiha")
 [node name="WorldParent" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="UiParent" type="Control" parent="."]
+[node name="UiParent" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" type="Control" parent="UiParent"]
+unique_name_in_owner = true
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_k680c")
+
+[node name="MessageBustRect" type="TextureRect" parent="UiParent/DialogueBox"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.722
+anchor_bottom = 0.722
+offset_left = 0.0018549
+offset_top = -0.0148163
+offset_right = 0.0018549
+offset_bottom = -0.0148163
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UiParent/DialogueBox"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="NamePlatePanel" type="PanelContainer" parent="UiParent/DialogueBox/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wxxsr")
+
+[node name="NameLabel" type="Label" parent="UiParent/DialogueBox/VBoxContainer/NamePlatePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 8
+text = "Name"
+
+[node name="DialoguePanel" type="PanelContainer" parent="UiParent/DialogueBox/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_em1ed")
+
+[node name="MarginContainer" type="MarginContainer" parent="UiParent/DialogueBox/VBoxContainer/DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_right = 12
+
+[node name="DialogueLabel" type="Label" parent="UiParent/DialogueBox/VBoxContainer/DialoguePanel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8
+autowrap_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UiParent/DialogueBox/VBoxContainer/DialoguePanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+bbcode_enabled = true
+scroll_active = false
+
+[node name="CursorTextureRect" type="TextureRect" parent="UiParent/DialogueBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+offset_left = 306.0
+offset_top = 168.0
+offset_right = 316.0
+offset_bottom = 176.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("4_dwpl0")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="Debug" type="Node" parent="."]
 script = ExtResource("2_s5un5")

@@ -5,7 +5,10 @@ class_name Main
 ## Scenes can be added or removed from it using the ScenesManager autoload.
 
 @onready var world_parent: Node2D = $WorldParent
-@onready var ui_parent: Control = $UiParent
+
+## UI
+@onready var ui_parent: CanvasLayer = $UiParent
+@onready var dialogue_box:DialogueBox = %DialogueBox
 
 ## Allows you to reference this node kinda like an autoload by just doing Main.instance.whatever_you_want_here()
 static var instance:Main
