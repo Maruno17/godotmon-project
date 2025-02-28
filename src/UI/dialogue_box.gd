@@ -3,7 +3,7 @@ class_name DialogueBox
 
 ## NOTE: Modifying this scripts code while the game is running in the background seems to cuase un explainable crashes. This does not happen if you modify the code of another script so it's probably not an issue but keep it in mind if your making edits to this script
 
-@onready var dialogue_label = %DialogueLabel
+@onready var dialogue_label = %ImprovedRichTextLabel
 @onready var cursor_texture_rect = %CursorTextureRect
 @onready var name_plate_panel = %NamePlatePanel
 @onready var name_label = %NameLabel
@@ -33,6 +33,7 @@ func _ready() -> void:
 
 func _ready_dialogue_box(message:String, speaker_name:String = "", message_bust_file_path:String = "") -> void:
 	# Reset state
+	dialogue_label.text = ""
 	cursor_texture_rect.hide()
 	name_plate_panel.hide()
 	message_bust_rect.hide()
@@ -84,6 +85,7 @@ func set_message(message:String, speaker_name:String = "", message_bust_file_pat
 	# Hide when done
 	await _transition(false)
 
+# They typed bool determines weather text should flow on screen or should it all be shown instantly all at once
 func _display_chunk(typed:bool = true) -> void:
 	# Get remaining text and reset display
 	var remaining_text = full_message.substr(displayed_chars)
@@ -102,9 +104,9 @@ func _display_chunk(typed:bool = true) -> void:
 			dialogue_label.visible_characters = i + 1
 			
 			# Check if adding a new line
-			var new_line_count = dialogue_label.get_line_count()
-			if new_line_count > current_line_count:
-				current_line_count = new_line_count
+			if dialogue_label.better_get_line_count() > current_line_count:
+				
+				current_line_count = dialogue_label.better_get_line_count()
 				
 				# Update last safe position before line break
 				last_safe_char_count = i
@@ -114,7 +116,7 @@ func _display_chunk(typed:bool = true) -> void:
 					dialogue_label.visible_characters = last_safe_char_count
 					break
 				
-			# If user pressed accept then auto fill rest of dialgue instead of doing text flow
+			# If user pressed accept, then auto fill rest of dialgue instead of doing text flow
 			if not typing_in_progress:
 				_display_text_instantly(remaining_text)
 				
@@ -140,10 +142,10 @@ func _display_chunk(typed:bool = true) -> void:
 
 # Show max characters without exceeding line limit all at once
 func _display_text_instantly(remaining_text:String) -> void:
-	while dialogue_label.get_line_count() <= max_visible_lines and dialogue_label.visible_characters < remaining_text.length():
+	while dialogue_label.better_get_line_count() <= max_visible_lines and dialogue_label.visible_characters < remaining_text.length():
 		dialogue_label.visible_characters += 1
 	
-	if dialogue_label.get_line_count() > max_visible_lines:
+	if dialogue_label.better_get_line_count() > max_visible_lines:
 		dialogue_label.visible_characters -= 1
 
 func _input(event) -> void:
@@ -175,6 +177,7 @@ func _transition(show:bool) -> void:
 		var new_y = position.y + get_viewport().get_visible_rect().size.y # NOTE: Not sure if this code is future proof for if/when we add things like changing screen sizes and stuff
 		tween.tween_property(self, "position", Vector2(position.x, new_y), 0.5)
 		tween.tween_callback(_clean_up_dialogue_box)
+		await tween.finished
 
 func _cursor_hover() -> void:
 	var cursor_og_pos = cursor_texture_rect.position

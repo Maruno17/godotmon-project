@@ -7,8 +7,13 @@ func _ready() -> void:
 	ScenesManager.add_scene("res://assets/maps/test map.tscn", ScenesManager.SceneType.WORLD)
 	ScenesManager.add_scene("res://assets/templates/player.tscn", ScenesManager.SceneType.ENTITY, Vector2i(5, 5))
 	
-	Main.instance.dialogue_box.type_message(
-		"TTTzzzzzz\nzzzzzzTTTTTTTTTTT\nTTTTTTTTTTT\nTTTTTT\nTTTTT\nTTTT\nTzzz\nzzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzzTTTTTTTTTTzTTTTTTTTTzzz",
+	await Main.instance.dialogue_box.type_message(
+		"Typed test: TTTzzzzzz\nzzzzzzTTTTTTTTTTT\nTTTTTTTTTTT\nTTTTTT\nTTTTT\nTTTT\nTzzz\nzzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzzTTTTTTTTTTzTTTTTTTTTzzz",
 		"Bill",
+		"res://icon.svg"
+	)
+	await Main.instance.dialogue_box.set_message(
+		"Instant text test: TTTzzzzzz\nzzzzzzTTTTTTTTTTT\nTTTTTTTTTTT\nTTTTTT\nTTTTT\nTTTT\nTzzz\nzzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTzzzzzzzzTTTTTTTTTTzTTTTTTTTTzzz",
+		"Mack",
 		"res://icon.svg"
 	)

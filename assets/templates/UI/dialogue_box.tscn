@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://58qvb686kexx"]
+[gd_scene load_steps=7 format=3 uid="uid://58qvb686kexx"]
 
 [ext_resource type="Script" path="res://src/UI/dialogue_box.gd" id="1_6op05"]
 [ext_resource type="Texture2D" uid="uid://rffaq44ec7ki" path="res://assets/graphics/ui/dialogue/windowskin/default_name_box.png" id="2_xmc35"]
 [ext_resource type="Texture2D" uid="uid://cysqbvwau42c0" path="res://assets/graphics/ui/dialogue/windowskin/default_arrow.png" id="3_csjej"]
+[ext_resource type="Script" path="res://src/UI/improved_rich_text_label.gd" id="3_um7j4"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxxsr"]
 texture = ExtResource("2_xmc35")
@@ -74,24 +75,17 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_em1ed")
 layout_mode = 2
 theme_override_constants/margin_right = 12
 
-[node name="DialogueLabel" type="Label" parent="VBoxContainer/DialoguePanel/MarginContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 8
-autowrap_mode = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/DialoguePanel/MarginContainer"]
+[node name="ImprovedRichTextLabel" type="RichTextLabel" parent="VBoxContainer/DialoguePanel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/bold_italics_font_size = 10
-theme_override_font_sizes/italics_font_size = 10
-theme_override_font_sizes/mono_font_size = 10
-theme_override_font_sizes/normal_font_size = 10
-theme_override_font_sizes/bold_font_size = 10
+theme_override_font_sizes/bold_italics_font_size = 8
+theme_override_font_sizes/italics_font_size = 8
+theme_override_font_sizes/mono_font_size = 8
+theme_override_font_sizes/normal_font_size = 8
+theme_override_font_sizes/bold_font_size = 8
 bbcode_enabled = true
 scroll_active = false
+script = ExtResource("3_um7j4")
 
 [node name="CursorTextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true
