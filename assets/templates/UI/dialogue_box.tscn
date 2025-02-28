@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=3 uid="uid://58qvb686kexx"]
+
+[ext_resource type="Script" path="res://src/UI/dialogue_box.gd" id="1_6op05"]
+[ext_resource type="Texture2D" uid="uid://rffaq44ec7ki" path="res://assets/graphics/ui/dialogue/windowskin/default_name_box.png" id="2_xmc35"]
+[ext_resource type="Texture2D" uid="uid://cysqbvwau42c0" path="res://assets/graphics/ui/dialogue/windowskin/default_arrow.png" id="3_csjej"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxxsr"]
+texture = ExtResource("2_xmc35")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_em1ed"]
+texture = ExtResource("2_xmc35")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 180.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6op05")
+
+[node name="MessageBustRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.722
+anchor_bottom = 0.722
+offset_left = 0.0018549
+offset_top = -0.0148163
+offset_right = 0.0018549
+offset_bottom = -0.0148163
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 2
+
+[node name="NamePlatePanel" type="PanelContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wxxsr")
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/NamePlatePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 8
+text = "Name"
+
+[node name="DialoguePanel" type="PanelContainer" parent="VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_em1ed")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_right = 12
+
+[node name="DialogueLabel" type="Label" parent="VBoxContainer/DialoguePanel/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8
+autowrap_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/DialoguePanel/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/bold_italics_font_size = 10
+theme_override_font_sizes/italics_font_size = 10
+theme_override_font_sizes/mono_font_size = 10
+theme_override_font_sizes/normal_font_size = 10
+theme_override_font_sizes/bold_font_size = 10
+bbcode_enabled = true
+scroll_active = false
+
+[node name="CursorTextureRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+offset_left = 306.0
+offset_top = 168.0
+offset_right = 316.0
+offset_bottom = 176.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = ExtResource("3_csjej")
+expand_mode = 3
+stretch_mode = 5
