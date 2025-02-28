@@ -14,6 +14,7 @@ y_sort_enabled = true
 
 [node name="DialogueBox" parent="UiParent" instance=ExtResource("2_3mgtm")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Debug" type="Node" parent="."]
 script = ExtResource("2_s5un5")
