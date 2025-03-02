@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctg0aclj7s5o"]
+[gd_scene load_steps=4 format=3 uid="uid://ctg0aclj7s5o"]
 
 [ext_resource type="Script" path="res://src/main/main.gd" id="1_sqiha"]
+[ext_resource type="PackedScene" uid="uid://58qvb686kexx" path="res://assets/templates/UI/dialogue_box.tscn" id="2_3mgtm"]
 [ext_resource type="Script" path="res://src/main/debug.gd" id="2_s5un5"]
 
 [node name="Main" type="Node"]
@@ -9,13 +10,11 @@ script = ExtResource("1_sqiha")
 [node name="WorldParent" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="UiParent" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="UiParent" type="CanvasLayer" parent="."]
+
+[node name="DialogueBox" parent="UiParent" instance=ExtResource("2_3mgtm")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Debug" type="Node" parent="."]
 script = ExtResource("2_s5un5")

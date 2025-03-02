@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=4 uid="uid://ciwa31sai6p55"]
+[gd_scene load_steps=5 format=4 uid="uid://ciwa31sai6p55"]
 
 [ext_resource type="TileSet" uid="uid://cp7ecdv0bd158" path="res://assets/data/tilesets/field.tres" id="1_bwv3s"]
+[ext_resource type="Texture2D" uid="uid://fa43shloevct" path="res://assets/graphics/entities/player/Player Base running.png" id="2_3b20i"]
+[ext_resource type="Script" path="res://assets/templates/NPC/npc_test_guy.gd" id="2_qyk1s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5n81"]
+size = Vector2(16, 16)
 
 [node name="Map" type="Node2D"]
 y_sort_enabled = true
@@ -17,3 +22,25 @@ tile_set = ExtResource("1_bwv3s")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAABAAMAAQAAAAAAAAABAAQAAQAGAAAAAAAKAAQAAQAFAAAAAAALAAQAAQAFAAAAAAAMAAQAAQAFAAAAAAABAAUAAQAGAAAAAAAAAAcAAQAGAAAAAAABAAgAAQAAAAAAAAAAAAsAAQAGAAAAAAABAA0AAQAGAAAAAAAFAA8AAQAGAAAAAAARAA8AAQAAAAAAAAAXAAwAAQAFAAAAAAAXAA0AAQAFAAAAAAAVAA4AAQAGAAAAAAASAAIAAQAGAAAAAAARAAEAAQAAAAAAAAAIAAoAAQAAAAIAAAA=")
 tile_set = ExtResource("1_bwv3s")
+
+[node name="NPCs" type="Node2D" parent="."]
+position = Vector2(168, 96)
+
+[node name="NPC Test Guy" type="CharacterBody2D" parent="NPCs"]
+position = Vector2(0, -8)
+script = ExtResource("2_qyk1s")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/NPC Test Guy"]
+shape = SubResource("RectangleShape2D_y5n81")
+
+[node name="Area2DInteractor" type="Area2D" parent="NPCs/NPC Test Guy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCs/NPC Test Guy/Area2DInteractor"]
+shape = SubResource("RectangleShape2D_y5n81")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCs/NPC Test Guy"]
+position = Vector2(0, -5)
+texture = ExtResource("2_3b20i")
+hframes = 8
+vframes = 4
