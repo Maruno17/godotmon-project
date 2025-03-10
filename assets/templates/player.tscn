@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=3 uid="uid://dnam5q1ktsojt"]
 
-[ext_resource type="Script" path="res://src/entities/player.gd" id="1_5y3l7"]
+[ext_resource type="Script" uid="uid://bqugl373wh6hc" path="res://src/entities/player.gd" id="1_5y3l7"]
 [ext_resource type="Texture2D" uid="uid://c8o6gf6i762gj" path="res://assets/graphics/entities/player/Player Base.png" id="1_v4k6m"]
 [ext_resource type="Texture2D" uid="uid://fa43shloevct" path="res://assets/graphics/entities/player/Player Base running.png" id="3_6qhbq"]
 
@@ -416,23 +416,23 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_16g1x"]
 _data = {
-"IdleDown": SubResource("Animation_2c8w0"),
-"IdleLeft": SubResource("Animation_g5xdd"),
-"IdleRight": SubResource("Animation_3ih5q"),
-"IdleUp": SubResource("Animation_kemmw"),
-"RESET": SubResource("Animation_6gwn8"),
-"RunDown": SubResource("Animation_7kyic"),
-"RunLeft": SubResource("Animation_x4tll"),
-"RunRight": SubResource("Animation_afie7"),
-"RunUp": SubResource("Animation_g7ine"),
-"TurnDown": SubResource("Animation_qy5q8"),
-"TurnLeft": SubResource("Animation_kmevt"),
-"TurnRight": SubResource("Animation_oulvh"),
-"TurnUp": SubResource("Animation_ea5r5"),
-"WalkDown": SubResource("Animation_jlell"),
-"WalkLeft": SubResource("Animation_3krc7"),
-"WalkRight": SubResource("Animation_apayn"),
-"WalkUp": SubResource("Animation_umelr")
+&"IdleDown": SubResource("Animation_2c8w0"),
+&"IdleLeft": SubResource("Animation_g5xdd"),
+&"IdleRight": SubResource("Animation_3ih5q"),
+&"IdleUp": SubResource("Animation_kemmw"),
+&"RESET": SubResource("Animation_6gwn8"),
+&"RunDown": SubResource("Animation_7kyic"),
+&"RunLeft": SubResource("Animation_x4tll"),
+&"RunRight": SubResource("Animation_afie7"),
+&"RunUp": SubResource("Animation_g7ine"),
+&"TurnDown": SubResource("Animation_qy5q8"),
+&"TurnLeft": SubResource("Animation_kmevt"),
+&"TurnRight": SubResource("Animation_oulvh"),
+&"TurnUp": SubResource("Animation_ea5r5"),
+&"WalkDown": SubResource("Animation_jlell"),
+&"WalkLeft": SubResource("Animation_3krc7"),
+&"WalkRight": SubResource("Animation_apayn"),
+&"WalkUp": SubResource("Animation_umelr")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mtg8j"]
