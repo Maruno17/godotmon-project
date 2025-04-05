@@ -99,7 +99,7 @@ func can_move_in_direction(direction: Vector2) -> bool:
 	if OS.is_debug_build() && Input.is_action_pressed("ui_control"):
 		return true
 	# Collision checks
-	ray.target_position = direction * GlobalConst.TILE_SIZE
+	ray.target_position = direction * Constants.TILE_SIZE
 	ray.force_raycast_update()
 	if ray.is_colliding():
 		percent_moved_to_next_tile = 0.0
@@ -122,13 +122,13 @@ func update_move(delta: float) -> void:
 	percent_moved_to_next_tile += WALK_SPEED * move_speed_multiplier * delta
 	if percent_moved_to_next_tile >= 1.0:
 		# Finished moving
-		position = move_start_position + (move_direction * GlobalConst.TILE_SIZE)
+		position = move_start_position + (move_direction * Constants.TILE_SIZE)
 		percent_moved_to_next_tile = 0.0
 		move_direction = Vector2.ZERO
 		set_speed_modifier(true)
 		is_moving = false
 	else:
-		position = move_start_position + (move_direction * GlobalConst.TILE_SIZE * percent_moved_to_next_tile)
+		position = move_start_position + (move_direction * Constants.TILE_SIZE * percent_moved_to_next_tile)
 
 
 func should_run() -> bool:

@@ -12,7 +12,7 @@ enum SceneType {WORLD, ENTITY, UI}
 
 ## Adds a scene to the main one.
 func add_scene(scene_path : String, scene_type : SceneType, coordinates : Vector2i = Vector2i.ZERO) -> void:
-	var final_position : Vector2i = coordinates * GlobalConst.TILE_SIZE
+	var final_position : Vector2i = coordinates * Constants.TILE_SIZE
 	
 	match scene_type:
 		SceneType.WORLD:
@@ -22,8 +22,8 @@ func add_scene(scene_path : String, scene_type : SceneType, coordinates : Vector
 			main.world_parent.add_child(scene)
 		SceneType.ENTITY:
 			var scene : Node2D = load(scene_path).instantiate()
-			#final_position.x += GlobalConst.TILE_SIZE / 2		#May need to be readded later when trying out stuff with y-sorting.
-			#final_position.y += GlobalConst.TILE_SIZE / 2
+			#final_position.x += Constants.TILE_SIZE / 2		#May need to be readded later when trying out stuff with y-sorting.
+			#final_position.y += Constants.TILE_SIZE / 2
 			scene.global_position = final_position
 			main.world_parent.add_child(scene)
 		SceneType.UI:
