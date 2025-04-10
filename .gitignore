@@ -15,6 +15,10 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
+# uid files
+*.uid
+
+
 # More ignored files
 *.tmp
 ._*
