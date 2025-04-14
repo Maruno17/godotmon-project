@@ -1,0 +1,48 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://byj1xty63ohlc"]
+
+[ext_resource type="FontFile" uid="uid://d1l2hpv4gm3eo" path="res://assets/fonts/pixel_operator/PixelOperator-Bold.ttf" id="1_48xmx"]
+[ext_resource type="Texture2D" uid="uid://rffaq44ec7ki" path="res://assets/ui/dialog/windowskin/default_name_box.png" id="1_ns61m"]
+[ext_resource type="FontFile" uid="uid://cq0ggkmhf4ww2" path="res://assets/fonts/pixel_operator/PixelOperatorMono.ttf" id="2_ljt6m"]
+[ext_resource type="Texture2D" uid="uid://dbp3f0xhmcwhb" path="res://assets/ui/dialog/windowskin/default_text_box.png" id="4_gptvs"]
+[ext_resource type="Texture2D" uid="uid://cysqbvwau42c0" path="res://assets/ui/dialog/windowskin/default_arrow.png" id="4_m6mku"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ojgw"]
+texture = ExtResource("1_ns61m")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 0, 6, 6)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rqhou"]
+texture = ExtResource("4_m6mku")
+expand_margin_left = 5.0
+expand_margin_top = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j0lrw"]
+texture = ExtResource("4_gptvs")
+texture_margin_left = 4.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 3.0
+
+[resource]
+DialogNameBoxLabel/base_type = &"RichTextLabel"
+DialogNameBoxLabel/colors/default_color = Color(0.913725, 0.921569, 0.941176, 1)
+DialogNameBoxLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+DialogNameBoxLabel/constants/shadow_offset_x = 0
+DialogNameBoxLabel/constants/shadow_outline_size = 0
+DialogNameBoxLabel/fonts/bold_font = ExtResource("1_48xmx")
+DialogNameBoxLabel/fonts/mono_font = ExtResource("2_ljt6m")
+DialogNameBoxLabel/styles/normal = SubResource("StyleBoxTexture_4ojgw")
+DialogTextBoxArrow/base_type = &"Panel"
+DialogTextBoxArrow/styles/panel = SubResource("StyleBoxTexture_rqhou")
+DialogTextBoxLabel/base_type = &"RichTextLabel"
+DialogTextBoxLabel/colors/default_color = Color(0.913725, 0.921569, 0.941176, 1)
+DialogTextBoxLabel/colors/font_shadow_color = Color(0, 0, 0, 1)
+DialogTextBoxLabel/constants/line_separation = -4
+DialogTextBoxLabel/constants/shadow_offset_x = 0
+DialogTextBoxLabel/constants/shadow_outline_size = 0
+DialogTextBoxLabel/fonts/bold_font = ExtResource("1_48xmx")
+DialogTextBoxLabel/fonts/mono_font = ExtResource("2_ljt6m")
+DialogTextBoxLabel/styles/normal = SubResource("StyleBoxTexture_j0lrw")
