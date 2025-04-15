@@ -545,6 +545,7 @@ node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
+collision_layer = 2
 motion_mode = 1
 script = ExtResource("1_5y3l7")
 
@@ -562,7 +563,7 @@ shape = SubResource("RectangleShape2D_l57c3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_16g1x")
+&"": SubResource("AnimationLibrary_16g1x")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -580,3 +581,10 @@ position = Vector2(8, 8)
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(8, 8)
 target_position = Vector2(0, 16)
+
+[node name="InteractionsRaycast" type="RayCast2D" parent="."]
+position = Vector2(8, 8)
+target_position = Vector2(0, 16)
+collision_mask = 524288
+collide_with_areas = true
+collide_with_bodies = false

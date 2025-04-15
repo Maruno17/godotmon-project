@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=4 uid="uid://ciwa31sai6p55"]
+[gd_scene load_steps=4 format=4 uid="uid://ciwa31sai6p55"]
 
 [ext_resource type="TileSet" uid="uid://cp7ecdv0bd158" path="res://assets/data/tilesets/field.tres" id="1_bwv3s"]
+[ext_resource type="Script" uid="uid://dw2oy080uicd1" path="res://src/action_node/action_node.gd" id="2_7byqs"]
+[ext_resource type="Script" uid="uid://p48w2mfls56y" path="res://src/action_node/action_example.gd" id="3_f1mjc"]
 
 [node name="Map" type="Node2D"]
 y_sort_enabled = true
@@ -17,3 +19,22 @@ tile_set = ExtResource("1_bwv3s")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAABAAMAAQAAAAAAAAABAAQAAQAGAAAAAAAKAAQAAQAFAAAAAAALAAQAAQAFAAAAAAAMAAQAAQAFAAAAAAABAAUAAQAGAAAAAAAAAAcAAQAGAAAAAAABAAgAAQAAAAAAAAAAAAsAAQAGAAAAAAABAA0AAQAGAAAAAAAFAA8AAQAGAAAAAAARAA8AAQAAAAAAAAAXAAwAAQAFAAAAAAAXAA0AAQAFAAAAAAAVAA4AAQAGAAAAAAASAAIAAQAGAAAAAAARAAEAAQAAAAAAAAAIAAoAAQAAAAIAAAA=")
 tile_set = ExtResource("1_bwv3s")
+
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="ActionNode" type="Node2D" parent="Actions"]
+top_level = true
+position = Vector2(144, 80)
+script = ExtResource("2_7byqs")
+action_script = ExtResource("3_f1mjc")
+debug_color = Color(1, 0.054902, 0, 0.498039)
+metadata/_custom_type_script = "uid://dw2oy080uicd1"
+
+[node name="ActionNode2" type="Node2D" parent="Actions"]
+top_level = true
+position = Vector2(144, 112)
+script = ExtResource("2_7byqs")
+action_mode = 1
+action_script = ExtResource("3_f1mjc")
+debug_color = Color(0, 0.065177, 1, 0.5)
+metadata/_custom_type_script = "uid://dw2oy080uicd1"

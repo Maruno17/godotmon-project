@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1ma6t1a1776"]
+
+[ext_resource type="Script" uid="uid://dw2oy080uicd1" path="res://src/action_node/action_node.gd" id="1_kgpbt"]
+
+[node name="ActionNode" type="Node2D"]
+top_level = true
+light_mask = 0
+visibility_layer = 524288
+z_index = 999
+z_as_relative = false
+script = ExtResource("1_kgpbt")
