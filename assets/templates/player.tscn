@@ -562,7 +562,7 @@ shape = SubResource("RectangleShape2D_l57c3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_16g1x")
+&"": SubResource("AnimationLibrary_16g1x")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

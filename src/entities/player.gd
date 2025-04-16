@@ -10,23 +10,26 @@ enum FacingDirection { LEFT, RIGHT, UP, DOWN }
 
 
 ## Default speed of this entity in tiles/second.
-const WALK_SPEED = 4.0
+const WALK_SPEED : float = 4.0
 ## Running speed of this entity, as a multiplier of WALK_SPEED.
-const RUN_SPEED_MULTIPLIER = 2.0
+const RUN_SPEED_MULTIPLIER : float = 2.0
+## Deadzone used when determining the vector used for player movements.
+const INPUT_DEADZONE : float = 0.1
 
-var player_state = PlayerState.IDLE
-var facing_direction = FacingDirection.DOWN
+var player_state : PlayerState = PlayerState.IDLE
+var facing_direction : FacingDirection = FacingDirection.DOWN
 # Variables relating to the player moving
-var is_moving = false
-var move_start_position = Vector2.ZERO
-var move_direction = Vector2.ZERO
-var move_speed_multiplier = 1.0
-var percent_moved_to_next_tile = 0.0
+var is_moving : bool = false
+var move_start_position : Vector2 = Vector2.ZERO
+var move_direction : Vector2 = Vector2.ZERO
+var move_speed_multiplier : float = 1.0
+var percent_moved_to_next_tile : float = 0.0
+var last_direction : Vector2 = Vector2(1,0)
 
-@onready var anim_player = $AnimationPlayer
-@onready var anim_tree = $AnimationTree
+@onready var anim_player : AnimationPlayer = $AnimationPlayer
+@onready var anim_tree : AnimationTree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/StateMachine/playback")
-@onready var ray = $RayCast2D
+@onready var ray : RayCast2D = $RayCast2D
 
 #-------------------------------------------------------------------------------
 
@@ -53,9 +56,9 @@ func _physics_process(delta: float) -> void:
 
 func process_player_input(moved_last_update: bool = false) -> void:
 	# Detect directional input
-	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if input_direction.x != 0 and input_direction.y !=0:
-		input_direction.y = 0
+	var input_direction : Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down", INPUT_DEADZONE)
+	
+	input_direction = _get_appropriate_direction(input_direction)
 	
 	# If no directional input, idle
 	if input_direction.is_zero_approx():
@@ -72,6 +75,29 @@ func process_player_input(moved_last_update: bool = false) -> void:
 		move(input_direction)
 	else:
 		set_state(PlayerState.IDLE)
+
+
+func _get_appropriate_direction(input_direction : Vector2) -> Vector2:
+	match Constants.MOVEMENT_MODE:
+		Constants.MovementMode.GRID_4:
+			if input_direction.x != 0 and input_direction.y !=0:
+				if not is_zero_approx(last_direction.x):
+					input_direction.x = 0
+				elif not is_zero_approx(last_direction.y) or last_direction == Vector2.ZERO:
+					input_direction.y = 0
+			elif input_direction != Vector2.ZERO:
+				last_direction = input_direction.sign()
+				
+		Constants.MovementMode.GRID_8:
+			input_direction = input_direction.sign()
+			if input_direction != Vector2.ZERO:
+				last_direction = input_direction
+		
+		Constants.MovementMode.FREE:
+			if input_direction != Vector2.ZERO:
+				last_direction = input_direction
+	
+	return input_direction
 
 #-------------------------------------------------------------------------------
 

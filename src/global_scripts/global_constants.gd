@@ -9,6 +9,16 @@ class_name Constants
 
 #region OVERWORLD
 
+## The various mode of movements for the overworld entities.
+enum MovementMode {
+	## Entities can move vertically and horizontally on a grid whose size is determined by the [constant TILE_SIZE] constant. 
+	GRID_4,
+	## Entities can move vertically, horizontally and diagonally on a grid whose size is determined by the [constant TILE_SIZE] constant. 
+	GRID_8,
+	## Entities can move freely in every direction.
+	FREE
+	}
+const MOVEMENT_MODE : MovementMode = MovementMode.GRID_4
 ## Size of a tile in pixels. Assumes tiles are square.
 const TILE_SIZE : int = 16
 
