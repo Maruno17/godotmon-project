@@ -1,8 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://dnam5q1ktsojt"]
+[gd_scene load_steps=47 format=3 uid="uid://dnam5q1ktsojt"]
 
 [ext_resource type="Script" uid="uid://bqugl373wh6hc" path="res://src/entities/player.gd" id="1_5y3l7"]
 [ext_resource type="Texture2D" uid="uid://c8o6gf6i762gj" path="res://assets/graphics/entities/player/Player Base.png" id="1_v4k6m"]
 [ext_resource type="Texture2D" uid="uid://fa43shloevct" path="res://assets/graphics/entities/player/Player Base running.png" id="3_6qhbq"]
+[ext_resource type="Script" uid="uid://d1bqhl3iw0itm" path="res://src/entities/player_controllers/grid_4_controller.gd" id="4_w6hia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l57c3"]
 size = Vector2(16, 16)
@@ -536,6 +537,7 @@ states/Walk/position = Vector2(396, 155)
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_euqtn"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_3cu2r"]
+graph_offset = Vector2(-177.792, 93.1647)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_1daa7")
 nodes/StateMachine/position = Vector2(40, 120)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_euqtn")
@@ -543,10 +545,12 @@ nodes/TimeScale/position = Vector2(260, 120)
 nodes/output/position = Vector2(420, 120)
 node_connections = [&"TimeScale", 0, &"StateMachine", &"output", 0, &"TimeScale"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "animation_tree")]
 y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_5y3l7")
+animation_player = NodePath("AnimationPlayer")
+animation_tree = NodePath("AnimationTree")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -562,7 +566,7 @@ shape = SubResource("RectangleShape2D_l57c3")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_16g1x")
+&"": SubResource("AnimationLibrary_16g1x")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -571,7 +575,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/Idle/blend_position = Vector2(0, 0)
 parameters/StateMachine/Run/blend_position = Vector2(0, 0)
 parameters/StateMachine/Turn/blend_position = Vector2(0, 0)
-parameters/StateMachine/Walk/blend_position = Vector2(0, 0)
+parameters/StateMachine/Walk/blend_position = Vector2(0.00121903, -0.000600576)
 parameters/TimeScale/scale = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -580,3 +584,7 @@ position = Vector2(8, 8)
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(8, 8)
 target_position = Vector2(0, 16)
+
+[node name="Grid4Controller" type="Node" parent="."]
+script = ExtResource("4_w6hia")
+metadata/_custom_type_script = "uid://d1bqhl3iw0itm"
