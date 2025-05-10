@@ -27,6 +27,7 @@ var percent_moved_to_next_tile = 0.0
 @onready var anim_tree = $AnimationTree
 @onready var anim_state = anim_tree.get("parameters/StateMachine/playback")
 @onready var ray = $RayCast2D
+@onready var interactions_raycast: RayCast2D = $InteractionsRaycast
 
 #-------------------------------------------------------------------------------
 
@@ -35,6 +36,11 @@ func _ready() -> void:
 	set_state(PlayerState.IDLE)
 	move_start_position = position
 	turn(direction_to_vector(facing_direction))
+	
+	interactions_raycast.target_position.y = Constants.TILE_SIZE
+	@warning_ignore("integer_division")
+	interactions_raycast.position = Vector2(Constants.TILE_SIZE / 2, Constants.TILE_SIZE / 2)
+	
 
 #-------------------------------------------------------------------------------
 
@@ -56,6 +62,10 @@ func process_player_input(moved_last_update: bool = false) -> void:
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if input_direction.x != 0 and input_direction.y !=0:
 		input_direction.y = 0
+	
+	if input_direction != Vector2.ZERO:
+		interactions_raycast.target_position = input_direction.sign() * Constants.TILE_SIZE
+		interactions_raycast.force_raycast_update()
 	
 	# If no directional input, idle
 	if input_direction.is_zero_approx():
@@ -183,3 +193,9 @@ func direction_to_vector(direction: FacingDirection) -> Vector2:
 		FacingDirection.DOWN:
 			vector.y = 1
 	return vector
+
+#-------------------------------------------------------------------------------
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and interactions_raycast.is_colliding():
+		interactions_raycast.get_collider().get_parent().run_interaction(self)

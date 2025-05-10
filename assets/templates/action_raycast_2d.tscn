@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bskorbebnyhv1"]
+
+[ext_resource type="Script" uid="uid://ctg0tgpta5ldx" path="res://src/action_node/action_raycast_2d.gd" id="1_55gc4"]
+
+[node name="ActionRaycast2D" type="RayCast2D"]
+target_position = Vector2(0, 16)
+collision_mask = 0
+script = ExtResource("1_55gc4")
