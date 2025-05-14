@@ -18,15 +18,25 @@ const TILE_SIZE : int = 16
 
 ## Enum describing all the possible gender generation rates.
 enum FemaleRate {
-ASEXUAL,
-MALE_ONLY,
-FEMALE_12_5,
-FEMALE_25,
-FEMALE_37_5,
-FEMALE_62_5,
-FEMALE_75,
-FEMALE_87_5,
-FEMALE_ONLY
+	ASEXUAL,
+	MALE_ONLY,
+	FEMALE_12_5,
+	FEMALE_25,
+	FEMALE_37_5,
+	FEMALE_62_5,
+	FEMALE_75,
+	FEMALE_87_5,
+	FEMALE_ONLY
+}
+
+## Enum describing all the possible grow rates.
+enum GrowthRate {
+	FAST,
+	NORMAL,
+	SLOW,
+	PARABOLIC,
+	ERRATIC,
+	FLUCTUATING
 }
 
 #endregion
