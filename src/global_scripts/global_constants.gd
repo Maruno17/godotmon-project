@@ -16,6 +16,9 @@ const TILE_SIZE : int = 16
 
 #region MONSTERS
 
+## The maximum level a monster can reach.
+const MAX_LEVEL : int = 100
+
 ## Enum describing all the possible gender generation rates.
 enum FemaleRate {
 ASEXUAL,
