@@ -5,7 +5,7 @@ var current_direction: Vector2
 var running_requested: bool
 var ghost_movement_requested: bool
 
-func _process(_delta: float) -> void:
+func update() -> void:
 	current_direction = _get_direction(Input.get_vector("move_left", "move_right", "move_up", "move_down"))
 	running_requested = _should_run();
 	ghost_movement_requested = _should_walk_through_walls()

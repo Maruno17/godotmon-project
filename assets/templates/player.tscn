@@ -1,8 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://dnam5q1ktsojt"]
+[gd_scene load_steps=49 format=3 uid="uid://dnam5q1ktsojt"]
 
 [ext_resource type="Script" uid="uid://bqugl373wh6hc" path="res://src/entities/player.gd" id="1_5y3l7"]
 [ext_resource type="Texture2D" uid="uid://c8o6gf6i762gj" path="res://assets/graphics/entities/player/Player Base.png" id="1_v4k6m"]
 [ext_resource type="Texture2D" uid="uid://fa43shloevct" path="res://assets/graphics/entities/player/Player Base running.png" id="3_6qhbq"]
+[ext_resource type="Script" uid="uid://ckbty1ooak55b" path="res://src/entities/movers/player_mover_component.gd" id="3_7srj3"]
 [ext_resource type="Script" uid="uid://b0j850jmyoqp8" path="res://src/entities/controllers/grid4_player_controller.gd" id="4_w6hia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l57c3"]
@@ -235,20 +236,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [1]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"finished_turning"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_kmevt"]
 resource_name = "TurnLeft"
@@ -265,20 +252,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [9]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"finished_turning"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_oulvh"]
@@ -297,20 +270,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [17]
 }
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"finished_turning"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_ea5r5"]
 resource_name = "TurnUp"
@@ -327,20 +286,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [25]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"finished_turning"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_jlell"]
@@ -492,6 +437,8 @@ animation = &"TurnRight"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e4wil"]
 animation = &"TurnUp"
 
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_7srj3"]
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_6vi6m"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_1nwxm")
 blend_point_0/pos = Vector2(-1, 0)
@@ -501,6 +448,9 @@ blend_point_2/node = SubResource("AnimationNodeAnimation_c8qo1")
 blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_e4wil")
 blend_point_3/pos = Vector2(0, -1)
+blend_point_4/node = SubResource("AnimationNodeBlendTree_7srj3")
+blend_point_4/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_omfg4"]
 animation = &"WalkLeft"
@@ -561,27 +511,32 @@ vframes = 4
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_l57c3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(8, 8)
+
+[node name="EntityMoverComponent" type="Node2D" parent="."]
+script = ExtResource("3_7srj3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="EntityMoverComponent"]
+root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_16g1x")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="EntityMoverComponent"]
+root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeBlendTree_3cu2r")
 anim_player = NodePath("../AnimationPlayer")
 parameters/StateMachine/Idle/blend_position = Vector2(0, 0)
 parameters/StateMachine/Run/blend_position = Vector2(0, 0)
-parameters/StateMachine/Turn/blend_position = Vector2(0, 0)
+parameters/StateMachine/Turn/blend_position = Vector2(-0.0721831, 0.0991735)
 parameters/StateMachine/Walk/blend_position = Vector2(0, 0)
 parameters/TimeScale/scale = 1.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="RayCast" type="RayCast2D" parent="EntityMoverComponent"]
 position = Vector2(8, 8)
+target_position = Vector2(0, 8)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(8, 8)
-target_position = Vector2(0, 16)
-
-[node name="Controller" type="Node" parent="."]
+[node name="Controller" type="Node" parent="EntityMoverComponent"]
 script = ExtResource("4_w6hia")
 metadata/_custom_type_script = "uid://b0j850jmyoqp8"
