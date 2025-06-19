@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=4 uid="uid://ciwa31sai6p55"]
+[gd_scene load_steps=3 format=4 uid="uid://ciwa31sai6p55"]
 
 [ext_resource type="TileSet" uid="uid://cp7ecdv0bd158" path="res://assets/data/tilesets/field.tres" id="1_bwv3s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1lhwk"]
 
 [node name="Map" type="Node2D"]
 y_sort_enabled = true
@@ -17,3 +19,8 @@ tile_set = ExtResource("1_bwv3s")
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAABAAMAAQAAAAAAAAABAAQAAQAGAAAAAAAKAAQAAQAFAAAAAAALAAQAAQAFAAAAAAAMAAQAAQAFAAAAAAABAAUAAQAGAAAAAAAAAAcAAQAGAAAAAAABAAgAAQAAAAAAAAAAAAsAAQAGAAAAAAABAA0AAQAGAAAAAAAFAA8AAQAGAAAAAAARAA8AAQAAAAAAAAAXAAwAAQAFAAAAAAAXAA0AAQAFAAAAAAAVAA4AAQAGAAAAAAASAAIAAQAGAAAAAAARAAEAAQAAAAAAAAAIAAoAAQAAAAIAAAA=")
 tile_set = ExtResource("1_bwv3s")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_1lhwk")
+offset_right = 40.0
+offset_bottom = 40.0

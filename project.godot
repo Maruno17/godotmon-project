@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 MusicPlayer="*res://src/autoloads/music_player/music_player.tscn"
 ScenesManager="*res://src/autoloads/scenes_manager.gd"
+Observer="*res://src/autoloads/observer.gd"
 
 [display]
 
