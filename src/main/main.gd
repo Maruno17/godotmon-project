@@ -7,4 +7,4 @@ class_name Main
 
 
 @onready var world_parent: Node2D = $WorldParent
-@onready var ui_parent: Control = $UiParent
+@onready var ui_parent: CanvasLayer = $UiParent

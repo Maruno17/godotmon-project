@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 MusicPlayer="*res://src/autoloads/music_player/music_player.tscn"
 ScenesManager="*res://src/autoloads/scenes_manager.gd"
+GDMUtils="*res://src/autoloads/gdmutils.gd"
+DialogBox="*res://assets/ui/dialog/dialog_box/dialog_box.tscn"
 
 [display]
 
@@ -29,6 +31,11 @@ window/size/window_width_override=960
 window/size/window_height_override=540
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/custom="res://assets/themes/default_theme.tres"
+theme/custom_font="res://assets/fonts/pixel_operator/PixelOperator.ttf"
 
 [input]
 

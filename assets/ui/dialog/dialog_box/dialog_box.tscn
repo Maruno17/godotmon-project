@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://ih5todhslvlu"]
+
+[ext_resource type="Script" path="res://src/ui/dialog_box/dialog_box.gd" id="1_yltwh"]
+[ext_resource type="Texture2D" uid="uid://bshje4fgqndau" path="res://assets/ui/dialog/portraits/prof_godot.png" id="2_vn338"]
+
+[node name="DialogBox" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_yltwh")
+
+[node name="DialogBox" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogBox/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PortraitTexture" type="TextureRect" parent="DialogBox/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("2_vn338")
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogBox/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="DialogBox/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"DialogNameBoxLabel"
+bbcode_enabled = true
+text = "test"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="DialogLabel" type="RichTextLabel" parent="DialogBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_type_variation = &"DialogTextBoxLabel"
+bbcode_enabled = true
+scroll_active = false
+visible_characters = 0
+visible_characters_behavior = 2
+visible_ratio = 0.0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogBox/MarginContainer/VBoxContainer/DialogLabel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ArrowPanel" type="Panel" parent="DialogBox/MarginContainer/VBoxContainer/DialogLabel/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_type_variation = &"DialogTextBoxArrow"
