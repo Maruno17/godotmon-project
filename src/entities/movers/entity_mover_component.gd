@@ -42,6 +42,12 @@ func _ready() -> void:
 	set_state(&"Idle")
 	_set_speed_modifier()
 
+func _enter_tree() -> void:
+	add_to_group(&"active_entity_mover_components")
+
+func _exit_tree() -> void:
+	remove_from_group(&"active_entity_mover_components")
+
 func set_state(new_state: StringName) -> void:
 	_state = new_state
 	_animation_state.travel(new_state)
@@ -93,11 +99,17 @@ func can_move_in_direction(direction: Vector2) -> bool:
 	_ray.target_position = direction * Constants.TILE_SIZE / 2
 	_ray.force_raycast_update()
 
-	if (_ray.is_colliding()):
+	if (_ray.is_colliding() || _will_move_to_another_entity_target_position(direction)):
 		collided.emit()
 		return false;
 
 	return true
+
+func _will_move_to_another_entity_target_position(direction: Vector2) -> bool:
+	var our_target_position = _parent.position + (direction * floor(Constants.TILE_SIZE * tile_amount_per_move))
+	var movable_entities = get_tree().get_nodes_in_group(&"active_entity_mover_components")
+	var movable_entity_going_on_target_position = func(m: EntityMoverComponent): return m != self && m is EntityMoverComponent && m.target_position() == our_target_position
+	return movable_entities.any(movable_entity_going_on_target_position)
 
 # TODO: fix this reset behavior (boolean params are massive red flag)
 func _set_speed_modifier(_reset = false) -> void:
@@ -112,11 +124,16 @@ func _physics_process(delta: float) -> void:
 	_amount_moved_to_next_tile += WALK_SPEED * _move_speed_multiplier * delta
 	if _amount_moved_to_next_tile >= tile_amount_per_move:
 		# Finished moving
-		_parent.position = _starting_position + (_moving_direction * floor(Constants.TILE_SIZE * tile_amount_per_move))
+		_parent.position = target_position()
 		_move_finished()
 	else:
 		# Still moving
 		_parent.position = _starting_position + (_moving_direction * floor(Constants.TILE_SIZE * _amount_moved_to_next_tile))
+
+func target_position() -> Vector2:
+	if (!is_moving()): return _parent.position
+
+	return _starting_position + (_moving_direction * floor(Constants.TILE_SIZE * tile_amount_per_move))
 
 func _move_finished() -> void:
 	_amount_moved_to_next_tile = 0.0
